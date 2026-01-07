@@ -1,5 +1,6 @@
 package com.aeroponica.taskmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -29,5 +30,6 @@ public class User {
     // Um usuário pode ter várias tarefas.
     // O "mappedBy" diz que a ligação é feita pelo campo "user" lá na classe Task.
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Task> tasks;
 }
