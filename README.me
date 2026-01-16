@@ -1,0 +1,35 @@
+# 🚀 Aeropônica Task Manager - API
+
+Esta é uma API REST para gerenciamento de tarefas, desenvolvida como parte de um desafio técnico. O sistema conta com autenticação segura, persistência de dados e testes unitários.
+
+## ✨ Funcionalidades
+- **Autenticação JWT:** Login seguro com geração de tokens.
+- **Segurança:** Criptografia de senhas com `BCrypt` e proteção de rotas com Spring Security.
+- **CRUD de Tarefas:** Criação, leitura, atualização e exclusão de tarefas.
+- **Testes Unitários:** Cobertura de lógica de negócio com `JUnit 5` e `Mockito`.
+
+## 🛠️ Tecnologias Utilizadas
+- **Java 17 / 21+**
+- **Spring Boot 3.x**
+- **Spring Security & JWT** (io.jsonwebtoken)
+- **Spring Data JPA**
+- **Banco de Dados H2**
+- **Maven**
+
+---
+
+## ⚙️ Configuração de Segurança (JWT)
+
+A aplicação utiliza uma chave secreta para assinar os tokens. Por segurança, ela é lida de uma variável de ambiente.
+
+**No IntelliJ:**
+Vá em `Run > Edit Configurations > Environment Variables` e adicione:
+`JWT_SECRET=SuaChaveSecretaComPeloMenos32Caracteres`
+
+---
+
+## 🚀 Como rodar o projeto
+
+1. **Clone o repositório:**
+   bash
+   git clone [https://github.com/CastroIago/task-manager.git](https://github.com/CastroIago/task-manager.git)
