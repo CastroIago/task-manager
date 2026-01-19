@@ -1,35 +1,134 @@
-# 🚀 Aeropônica Task Manager - API
+# 🚀 Aeropônica Task Manager API
 
-Esta é uma API REST para gerenciamento de tarefas, desenvolvida como parte de um desafio técnico. O sistema conta com autenticação segura, persistência de dados e testes unitários.
-
-## ✨ Funcionalidades
-- **Autenticação JWT:** Login seguro com geração de tokens.
-- **Segurança:** Criptografia de senhas com `BCrypt` e proteção de rotas com Spring Security.
-- **CRUD de Tarefas:** Criação, leitura, atualização e exclusão de tarefas.
-- **Testes Unitários:** Cobertura de lógica de negócio com `JUnit 5` e `Mockito`.
-
-## 🛠️ Tecnologias Utilizadas
-- **Java 17 / 21+**
-- **Spring Boot 3.x**
-- **Spring Security & JWT** (io.jsonwebtoken)
-- **Spring Data JPA**
-- **Banco de Dados H2**
-- **Maven**
+API REST desenvolvida para gerenciamento de tarefas, criada como parte de um **desafio técnico**.
+O projeto prioriza **segurança**, **organização do código** e **facilidade de execução**.
 
 ---
 
-## ⚙️ Configuração de Segurança (JWT)
+## 📋 Requisitos Entregues
 
-A aplicação utiliza uma chave secreta para assinar os tokens. Por segurança, ela é lida de uma variável de ambiente.
+- 📘 **Documentação da API** com descrição dos endpoints e exemplos via cURL
+- 🧠 **Modelo de Entidade e Relacionamento (MER)**
+- 🗄️ **Script de Banco de Dados** (`schema.sql` na raiz do projeto)
+- 🧪 **Testes unitários**
+- 🧾 **Código-fonte versionado** seguindo boas práticas
 
-**No IntelliJ:**
-Vá em `Run > Edit Configurations > Environment Variables` e adicione:
-`JWT_SECRET=SuaChaveSecretaComPeloMenos32Caracteres`
+---
+
+## 📊 Modelo de Entidade e Relacionamento (MER)
+
+O sistema utiliza um modelo relacional baseado no vínculo entre **usuários** e suas **tarefas**.
+
+### 🔹 Entidades
+
+#### User (Usuário)
+- `id` (PK): Identificador único
+- `email`: Identificador de acesso (único)
+- `password`: Senha criptografada com BCrypt
+
+#### Task (Tarefa)
+- `id` (PK): Identificador único
+- `title`: Título da tarefa
+- `description`: Descrição detalhada
+- `status`: Estado da tarefa (`PENDENTE`, `CONCLUIDO`)
+- `user_id` (FK): Referência ao usuário proprietário
+
+### 🔗 Relacionamento
+
+- **1:N (Um para Muitos)**
+  Um usuário pode possuir várias tarefas, mas cada tarefa pertence a apenas um usuário.
+
+---
+
+## ✨ Funcionalidades
+
+- 🔐 Autenticação com JWT
+- 🛡️ Proteção de rotas com Spring Security
+- 🔑 Criptografia de senhas com BCrypt
+- 📝 CRUD completo de tarefas
+- 🧪 Testes unitários com JUnit 5 e Mockito
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- Java
+- Spring Boot
+- Spring Security
+- JWT (io.jsonwebtoken)
+- Spring Data JPA
+- Banco de Dados H2
+- Maven
 
 ---
 
 ## 🚀 Como rodar o projeto
 
-1. **Clone o repositório:**
-   bash
-   git clone [https://github.com/CastroIago/task-manager.git](https://github.com/CastroIago/task-manager.git)
+### 1️⃣ Clonar o repositório
+```bash
+git clone https://github.com/CastroIago/task-manager.git
+```
+
+### 2️⃣ Acessar o diretório do projeto
+```bash
+cd task-manager
+```
+
+### 3️⃣ Executar a aplicação
+```bash
+mvn spring-boot:run
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:8080
+```
+
+---
+
+## 📌 Documentação da API & Exemplos (cURL)
+
+### 🔐 Autenticação
+
+#### Criar usuário
+**POST** `/api/auth/register`
+
+```bash
+curl -X POST http://localhost:8080/api/auth/register \
+-H "Content-Type: application/json" \
+-d '{"email":"iago@teste.com","password":"123456"}'
+```
+
+#### Login
+**POST** `/api/auth/login`
+Retorna um **token JWT**.
+
+---
+
+### 📝 Tarefas (Requer JWT)
+
+#### Criar tarefa
+**POST** `/api/tasks`
+
+```bash
+curl -X POST http://localhost:8080/api/tasks \
+-H "Authorization: Bearer SEU_TOKEN_AQUI" \
+-H "Content-Type: application/json" \
+-d '{"title":"Desafio Aeropônica","description":"Entregar o projeto final"}'
+```
+
+#### Listar tarefas
+**GET** `/api/tasks`
+
+#### Atualizar tarefa
+**PUT** `/api/tasks/{id}`
+
+#### Remover tarefa
+**DELETE** `/api/tasks/{id}`
+
+---
+
+## 📄 Licença
+
+Projeto desenvolvido exclusivamente para fins de **avaliação técnica**.
